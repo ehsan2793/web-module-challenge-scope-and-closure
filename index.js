@@ -9,7 +9,7 @@
  *  3. Return the result of invoking the callback function and passing in the FIRST 
  *     element in the array as the argument
  * 
- * The following code is demonstrating a way of completing this task
+ * The following code is demonstrating a way of fw completing this task
  * It returns the string `foofoo`
 */
 
@@ -28,11 +28,14 @@ console.log(processFirstItem(['foo','bar'],function(str){return str+str}));
   Study the code for counter1 and counter2, then answer the questions below.
   
   1. What is the difference between counter1 and counter2?
-  
+in counter 1 let or the count value is define with in the function where on the counter 2 let is a golobal object and it can acced by other function
+
   2. Which of the two uses a closure? How can you tell?
-  
+    the counter 1 uses closure and counter 2 doesn't use have numebr 2'
+
   3. In what scenario would the counter1 code be preferable? In what scenario would 
      counter2 be better?  
+     if we need count to be on globol scope then we can use  counter2
 */
 
 // counter1 code
@@ -63,7 +66,7 @@ NOTE: This will be a callback function for the tasks below
 */
 
 function inning(/*Code Here*/){
-    /*Code Here*/
+  return Math.floor(Math.random()*3);
 }
 
 
@@ -81,18 +84,33 @@ Use the finalScore function below to do the following:
 }
 */ 
 
-function finalScore(/*code Here*/){
-  /*Code Here*/
+function finalScore(inningCb,numberOfinning){
+ 
+  const score = {
+    Home: 0,
+    Away: 0
+  }
+  for (let i = 0; i < numberOfinning; i++) {
+    score.Home = inningCb()+ score.Home;
+    score.Away = inningCb() + score.Away;
+  }
+  return score;
 }
+console.log(finalScore(inning,9))
 
 /* ⚾️⚾️⚾️ Task 4: getInningScore() ⚾️⚾️⚾️
 Use the getInningScore() function below to do the following:
   1. Receive a callback function - you will pass in the inning function from task 2 as your argument 
   2. Return an object with a score for home and a score for away that populates from invoking the inning callback function */
 
-function getInningScore(/*Your Code Here */) {
-  /*Your Code Here */
-}
+function getInningScore(inning) {
+    return {
+      Home: inning(),
+      Away: inning()
+    }
+  }
+console.log(inning())
+
 
 
 /* ⚾️⚾️⚾️ Task 5: scoreboard() ⚾️⚾️⚾️
@@ -135,12 +153,26 @@ Use the scoreboard function below to do the following:
   "This game will require extra innings: Away 10 - Home 10"
 ]  
   */
-
-function scoreboard(/* CODE HERE */) {
-  /* CODE HERE */
+ // we want to give out function premetor or argument which it can recive so we are adding getInningScore, inning, number to the function
+function scoreboard(getInningScorecb,inningcb,number) {
+//   const array = [];
+//   // we need two varible Home and away which tells us thier score we will update them as we go forward for now they must be zero
+//   let Home = 0;
+//   let Away = 0;
+//   // now we need a loop so we can get new inning and scorse 
+// for (let i = 0; i < number; i++) {
+//   Home = Home + inningcb;
+//   Away = Away + inningcb;
+//   // pushing the sentence to the  array and up the warible each time in array we have an arrray with diffrent object in it 
+// array.push(`Inning${i}: Away${Away} - Home ${Home}`);
+// if (Away === Home) {
+//   array.push(`This game will require extra innings: Away ${Away} - Home ${Home}`)
+// } 
+// }
+//   return array
 }
 
-
+// console.log(scoreboard(getInnerScore,inning,9))
 
 
 /* 🛑🛑🛑🛑🛑 Please do not modify anything below this line 🛑🛑🛑🛑🛑 */
@@ -159,3 +191,28 @@ module.exports = {
   getInningScore,
   scoreboard,
 }
+
+
+
+
+// function scoreboard(inningScorecb, inningcb, numberOfInnings) {
+//   let allGameInnings = [];
+//   let totalHome = 0;
+//   let totalAway = 0;
+//   let homeScore = 0;
+//   let awayScore = 0;
+//   for(let i = 1; i <= numberOfInnings; i++){
+//     const currentScore = inningScorecb(inningcb);
+//     homeScore = currentScore.Home;
+//     awayScore = currentScore.Away;
+//     allGameInnings.push(Inning ${[i]}: Away ${awayScore} - Home ${homeScore});
+//     totalAway = totalAway += currentScore.Away;
+//     totalHome = totalHome += currentScore.Home;
+//   } 
+//   if(totalHome === totalAway){
+//     allGameInnings.push(This game will require extra innings: Away ${totalAway} - Home ${totalHome});
+//   }else{
+//     `allGameInnings.push(Final Score: Away ${totalAway} - Home ${totalHome});
+//   }
+//   return allGameInnings;
+// }
