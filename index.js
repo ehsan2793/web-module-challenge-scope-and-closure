@@ -103,7 +103,7 @@ Use the getInningScore() function below to do the following:
   1. Receive a callback function - you will pass in the inning function from task 2 as your argument 
   2. Return an object with a score for home and a score for away that populates from invoking the inning callback function */
 
-function getInningScore(inning) {
+function getInningScore(inningCb) {
     return {
       Home: inning(),
       Away: inning()
@@ -155,24 +155,27 @@ Use the scoreboard function below to do the following:
   */
  // we want to give out function premetor or argument which it can recive so we are adding getInningScore, inning, number to the function
 function scoreboard(getInningScorecb,inningcb,number) {
-//   const array = [];
-//   // we need two varible Home and away which tells us thier score we will update them as we go forward for now they must be zero
-//   let Home = 0;
-//   let Away = 0;
-//   // now we need a loop so we can get new inning and scorse 
-// for (let i = 0; i < number; i++) {
-//   Home = Home + inningcb;
-//   Away = Away + inningcb;
-//   // pushing the sentence to the  array and up the warible each time in array we have an arrray with diffrent object in it 
-// array.push(`Inning${i}: Away${Away} - Home ${Home}`);
-// if (Away === Home) {
-//   array.push(`This game will require extra innings: Away ${Away} - Home ${Home}`)
-// } 
-// }
-//   return array
+  const array = [];
+  // we need two varible Home and away which tells us thier score we will update them as we go forward for now they must be zero
+  let homeScore = 0;
+  let awayScore = 0;
+  // now we need a loop so we can get new inning and scorse 
+for (let i = 0; i < number; i++) {
+  const currentScore = getInningScorecb(inningcb());
+  homeScore +=  getInningScore.Home;
+  awayScore = 1 + getInningScore.Away;
+  // pushing the sentence to the  array and up the warible each time in array we have an arrray with diffrent object in it 
+array.push(`Inning ${i}: Away: ${currentScore.Away} - Home: ${currentScore.Home}`);
+if (awayScore === homeScore) {
+  array.push(`This game will require extra innings: Away: ${currentScore.Away} - Home: ${currentScore.Home}`);
+} else {
+  array.push(`fian score: Away: ${currentScore.Away} - Home: ${currentScore.Home}`);
+}}
+
+  return array
 }
 
-// console.log(scoreboard(getInnerScore,inning,9))
+console.log(scoreboard(getInningScore,inning,9))
 
 
 /* 🛑🛑🛑🛑🛑 Please do not modify anything below this line 🛑🛑🛑🛑🛑 */
